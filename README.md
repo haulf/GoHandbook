@@ -1,2 +1,0 @@
-# GoHandbook
-Golang study handbook.
