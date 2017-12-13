@@ -1,16 +1,8 @@
 # Golang Programming Style
 
-![96](http://upload.jianshu.io/users/upload_avatars/2463211/80337da84cfb.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96)
+(文章来源)http://www.jianshu.com/u/1381dc29fed9
 
- 
 
-[_张晓龙_](http://www.jianshu.com/u/1381dc29fed9)
-
- 
-
-**已关注
-
-2016.12.19 23:56* 字数 8039 阅读 531评论 3喜欢 11
 
 ## 前言
 
@@ -1038,38 +1030,5 @@ func MustCompile(str string) *Regexp {
 
 **说明：** 避免根据代码编写测试。
 
-** XP
 
-© 著作权归作者所有
 
-[举报文章]()
-
-![96](http://upload.jianshu.io/users/upload_avatars/2463211/80337da84cfb.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96)
-
-**已关注
-
-_张晓龙_
-
-写了 81772 字，被 302 人关注，获得了 319 个喜欢
-
-程序员，开源软件爱好者
-
-[**喜欢]()
-
- 
-
-[11]()
-
-[**]() [**](javascript:void((function(s,d,e,r,l,p,t,z,c){var%20f='http://v.t.sina.com.cn/share/share.php?appkey=1881139527',u=z||d.location,p=['&url=',e(u),'&title=',e(t||d.title),'&source=',e(r),'&sourceUrl=',e(l),'&content=',c||'gb2312','&pic=',e(p||'')].join('');function%20a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=440,height=430,left=',(s.width-440)/2,',top=',(s.height-430)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else%20a();})(screen,document,encodeURIComponent,'','','http://cwb.assets.jianshu.io/notes/images/7790730/weibo/image_0351746a1000.png',%20'%E6%8E%A8%E8%8D%90%20_%E5%BC%A0%E6%99%93%E9%BE%99_%20%E7%9A%84%E6%96%87%E7%AB%A0%E3%80%8AGolang%20Programming%20Style%E3%80%8B%EF%BC%88%20%E5%88%86%E4%BA%AB%E8%87%AA%20@%E7%AE%80%E4%B9%A6%20%EF%BC%89','http://www.jianshu.com/p/4540bb8fc9b5?utm_campaign=maleskine&utm_content=note&utm_medium=reader_share&utm_source=weibo','%E9%A1%B5%E9%9D%A2%E7%BC%96%E7%A0%81gb2312|utf-8%E9%BB%98%E8%AE%A4gb2312'));) [**](http://cwb.assets.jianshu.io/notes/images/7790730/weibo/image_0351746a1000.png) [更多分享](javascript:void(0);)
-
-- [**]()
-- [**]()
-- [**](javascript:void(0);)
-
-被以下专题收入，发现更多相似内容
-
-[**收入我的专题]()
-
-![img](http://upload.jianshu.io/collections/images/30374/%E6%9C%AA%E6%A0%87%E9%A2%98-1.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/64/h/64)Go语言
-
-![img](http://upload.jianshu.io/collections/images/541882/golangweb-logo.png?imageMogr2/auto-orient/strip|imageView2/1/w/64/h/64)Golang语言社区
