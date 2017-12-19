@@ -4,7 +4,7 @@
 
 ### 13.1 读取用户的输入
 
-​    如何读取用户的键盘（控制台）输入呢？从键盘和标准输入os.Stdin读取输入，最简单的办法是使用fmt包提供的Scan和Sscan开头的函数。请看以下程序：
+如何读取用户的键盘（控制台）输入呢？从键盘和标准输入os.Stdin读取输入，最简单的办法是使用fmt包提供的Scan()和Sscan()开头的函数。请看以下程序：
 
 * 程序示例【read_input_1.go】
 
@@ -35,6 +35,7 @@ func main() {
 	fmt.Scanln(&firstName, &lastName)
 	// fmt.Scanf("%s %s", &firstName, &lastName)
 	fmt.Printf("Hi %s %s!\n", firstName, lastName) // Hi ChrisNaegels
+  
 	fmt.Sscanf(input, format, &f, &i, &s)
 	fmt.Println("From the string we read: ", f, i, s)
 }
@@ -51,7 +52,11 @@ From the string we read:  56.12 5212 Go
 
 * 程序说明
 
-Scanln()扫描来自标准输入的文本，将空格分隔的值依次存放到后续的参数内，直到碰到换行。Scanf()与其类似，理解为格式化输入，除了Scanf()的第一个参数用作格式字符串，用来决定如何读取。Sscan()和以Sscan开头的函数则是从字符串读取，除此之外，与Scanf()相同。也可以使用bufio包提供的缓冲读取（buffered reader）来读取数据。
+(1) Scanln()函数扫描来自标准输入的文本，将空格分隔的输入值依次存放到后续的参数内，直到碰到换行。Scanf()函数与其类似，理解为格式化输入，它的第一个参数用作格式字符串，用来决定如何读取。
+
+(2) Sscan()和以Sscan开头的函数则是从字符串读取，除此之外，与Scanf()相同。
+
+(3) 也可以使用bufio包提供的缓冲读取（buffered reader）来读取数据。
 
 
 
@@ -97,9 +102,11 @@ The input was: I am aihaofeng. Thank you very much.
 
 * 程序说明
 
-inputReader是一个指向bufio.Reader的指针。`inputReader:= bufio.NewReader(os.Stdin)`这行代码，将会创建一个读取器，并将其与标准输入绑定。bufio.NewReader()构造函数的签名为：`func NewReader(rd io.Reader) *Reader`。该函数的实参可以是满足io.Reader接口的任意对象，函数返回一个新的带缓冲的io.Reader对象，它将从指定读取器（例如os.Stdin）读取内容。返回的读取器对象提供一个方法ReadString(delim byte)，该方法从输入中读取内容，直到碰到delim指定的字符，然后将读取到的内容连同delim字符一起放到缓冲区。ReadString返回读取到的字符串，如果碰到错误则返回nil。如果它一直读到文件结束，则返回读取到的字符串和io.EOF。如果读取过程中没有碰到delim字符，将返回错误err != nil。在上面的例子中，会读取键盘输入，直到回车键（\n）被按下。
+(1) inputReader是一个指向bufio.Reader的指针。`inputReader = bufio.NewReader(os.Stdin)`这行代码，将会创建一个读取器，并将其与标准输入绑定。
 
-屏幕是标准输出os.Stdout；os.Stderr用于显示错误信息，大多数情况下等同于os.Stdout。一般情况下，会省略变量声明，而使用 :=，例如：
+(2) bufio.NewReader()构造函数的签名为：`func NewReader(rd io.Reader) *Reader`。该函数的实参可以是满足io.Reader接口的任意对象，函数返回一个新的带缓冲的io.Reader对象，它将从指定读取器（例如标准输入os.Stdin）读取内容。返回的读取器对象提供一个方法ReadString(delim byte)，该方法从输入中读取内容，直到碰到delim指定的字符，然后将读取到的内容连同delim字符一起放到缓冲区。ReadString返回读取到的字符串，如果碰到错误则返回nil。如果它一直读到文件结束，则返回读取到的字符串和io.EOF。如果读取过程中没有碰到delim字符，将返回错误err != nil。
+
+(3) 在上面的例子中，会读取键盘输入，直到回车键（\n）被按下。屏幕是标准输出os.Stdout；os.Stderr用于显示错误信息，大多数情况下等同于os.Stdout。一般情况下，会省略变量声明，而使用 :=，例如：
 
 ```go
    inputReader := bufio.NewReader(os.Stdin)
@@ -211,75 +218,73 @@ You are not welcome here! Goodbye!
 
 #### 13.2.1 读文件
 
-​    在 Go 语言中，文件使用指向 os.File 类型的指针来表示的，也叫做文件句柄。在前面章节使用到过标准输入 os.Stdin 和标准输出 os.Stdout，它们的类型都是 *os.File。让来看看下面这个程序：
+在Go语言中，文件使用指向os.File类型的指针来表示的，也叫做文件句柄。在前面章节使用到过标准输入 os.Stdin和标准输出os.Stdout，它们的类型都是*os.File。
 
-示例fileinput.go：
+* 程序示例
 
-   package main
+```go
+// @file:        Demo.go
+// @author:      haulf
+// @date:        2017.12.19
+// @go version:  1.9
+// @brief:       File input test.
 
-   import (
+package main
 
-​       "bufio"
+import (
+	"bufio"
+	"fmt"
+	"io"
+	"os"
+)
 
-​       "fmt"
+func main() {
+	inputFile, inputError := os.Open("input.dat")
+	if inputError != nil {
+		fmt.Printf("An error occurred on opening the inputfile\n" +
+			"Does the file exist?\n" +
+			"Have you got acces toit?\n")
+		return // exit the function onerror
+	}
 
-​       "io"
+	defer inputFile.Close()
+	inputReader := bufio.NewReader(inputFile)
+	for {
+		inputString, readerError := inputReader.ReadString('\n')
+		if readerError == io.EOF {
+			return
+		}
 
-​       "os"
+		fmt.Printf("The input was: %s", inputString)
+	}
+}
+```
 
-​    )
+【input.dat】
 
-​    
+```go
+hello, haulf.
+Welcom!
+```
 
-   func main() {
+* 程序运行结果
 
-​       inputFile, inputError := os.Open("input.dat")
+```shell
+The input was: hello, haulf.
+The input was: Welcom!
+```
 
-​       if inputError != nil {
+* 程序说明
 
-​           fmt.Printf("An error occurred on opening the inputfile\n" +
+变量inputFile是*os.File类型的。该类型是一个结构，表示一个打开文件的描述符（文件句柄）。然后使用os包里的Open函数来打开一个文件。该函数的参数是文件名，类型为string。在上面的程序中，以只读模式打开input.dat文件。
 
-​                "Does the fileexist?\n" +
+如果文件不存在或者程序没有足够的权限打开这个文件，Open函数会返回一个错误：inputFile, inputError =os.Open("input.dat")。如果文件打开正常，就使用defer.Close()语句确保在程序退出前关闭该文件，然后使用bufio.NewReader来获得一个读取器变量。
 
-​                "Have you got acces toit?\n")
+通过使用bufio包提供的读取器（写入器也类似），如上面程序所示，可以很方便的操作相对高层的string对象，而避免了去操作比较底层的字节。
 
-​           return // exit the function onerror
+接着，在一个无限循环中使用ReadString('\n') 或ReadBytes('\n')将文件的内容逐行（行结束符 '\n'）读取出来。一旦读取到文件末尾，变量readerError的值将变成非空（事实上，常量io.EOF的值是true），就会执行return语句从而退出循环。
 
-​       }
-
-​       defer inputFile.Close()
-
-​    
-
-​       inputReader := bufio.NewReader(inputFile)
-
-​       for {
-
-​           inputString, readerError := inputReader.ReadString('\n')
-
-​           if readerError == io.EOF {
-
-​                return
-
-​           }
-
-​           fmt.Printf("The input was: %s", inputString)
-
-​       }
-
-​    }
-
-​    变量 inputFile 是 *os.File 类型的。该类型是一个结构，表示一个打开文件的描述符（文件句柄）。然后，使用 os 包里的 Open 函数来打开一个文件。该函数的参数是文件名，类型为 string。在上面的程序中，以只读模式打开 input.dat 文件。
-
-​    如果文件不存在或者程序没有足够的权限打开这个文件，Open函数会返回一个错误：inputFile, inputError =os.Open("input.dat")。如果文件打开正常，就使用defer.Close() 语句确保在程序退出前关闭该文件。然后，使用 bufio.NewReader 来获得一个读取器变量。
-
-​    通过使用 bufio 包提供的读取器（写入器也类似），如上面程序所示，可以很方便的操作相对高层的string 对象，而避免了去操作比较底层的字节。
-
-​    接着，在一个无限循环中使用 ReadString('\n') 或 ReadBytes('\n') 将文件的内容逐行（行结束符 '\n'）读取出来。
-
-​    注意：在之前的例子中，看到，Unix和Linux的行结束符是 \n，而Windows的行结束符是\r\n。在使用 ReadString 和 ReadBytes方法的时候，不需要关心操作系统的类型，直接使用 \n 就可以了。另外，也可以使用 ReadLine() 方法来实现相同的功能。
-
-​    一旦读取到文件末尾，变量 readerError 的值将变成非空（事实上，常量 io.EOF 的值是 true），就会执行 return 语句从而退出循环。
+注意：Unix和Linux的行结束符是\n，而Windows的行结束符是\r\n。在使用ReadString和ReadBytes方法的时候，不需要关心操作系统的类型，直接使用\n就可以了。另外，也可以使用ReadLine()方法来实现相同的功能。
 
  
 
