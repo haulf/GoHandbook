@@ -292,51 +292,45 @@ The input was: Welcom!
 
 1) 将整个文件的内容读到一个字符串里：
 
-​    如果您想这么做，可以使用 io/ioutil 包里的 ioutil.ReadFile() 方法，该方法第一个返回值的类型是 []byte，里面存放读取到的内容，第二个返回值是错误，如果没有错误发生，第二个返回值为 nil。请看示例 12.5。类似的，函数 WriteFile() 可以将 []byte 的值写入文件。
+如果想这么做，可以使用io/ioutil包里的ioutil.ReadFile()方法，该方法第一个返回值的类型是[]byte，里面存放读取到的内容，第二个返回值是错误，如果没有错误发生，第二个返回值为nil。类似一地，函数WriteFile()可以将[]byte的值写入文件。
 
-​    示例read_write_file1.go：
+* 程序示例
 
-   package main
+```go
+// @file:        read_write_file_1.go
+// @version:     1.0
+// @author:      aihaofeng
+// @date:        2017.12.25
+// @go version:  1.9
+// @brief:       Read and write test.
 
-   import (
+package main
 
-​       "fmt"
+import (
+	"fmt"
+	"io/ioutil"
+	"os"
+)
 
-​       "io/ioutil"
+func main() {
+	inputFile := "products.txt"
+	outputFile := "products_copy.txt"
 
-​       "os"
+	buf, err := ioutil.ReadFile(inputFile)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "File Error: %s\n", err)
+		// panic(err.Error())
+	}
 
-​    )
+	fmt.Printf("%s\n", string(buf))
+	err = ioutil.WriteFile(outputFile, buf, 0644) // oct, not hex
+	if err != nil {
+		panic(err.Error())
+	}
+}
+```
 
-​    
 
-   func main() {
-
-​       inputFile := "products.txt"
-
-​       outputFile := "products_copy.txt"
-
-​       buf, err := ioutil.ReadFile(inputFile)
-
-​       if err != nil {
-
-​           fmt.Fprintf(os.Stderr, "File Error: %s\n", err)
-
-​           // panic(err.Error())
-
-​           }
-
-​       fmt.Printf("%s\n", string(buf))
-
-​       err = ioutil.WriteFile(outputFile, buf, 0644) // oct, not hex
-
-​       if err != nil {
-
-​           panic(err. Error())
-
-​       }
-
-​    }
 
 2) 带缓冲的读取
 
