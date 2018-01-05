@@ -11,7 +11,7 @@
 ```go
 // @file:        read_input_1.go
 // @version:     1.0
-// @author:      aihaofeng
+// @author:      haulf
 // @date:        2017.12.11
 // @go version:  1.9
 // @brief:       Read test.
@@ -34,29 +34,20 @@ func main() {
 	fmt.Println("Please enter your full name: ")
 	fmt.Scanln(&firstName, &lastName)
 	// fmt.Scanf("%s %s", &firstName, &lastName)
-	fmt.Printf("Hi %s %s!\n", firstName, lastName) // Hi ChrisNaegels
+	fmt.Printf("Hi %s %s!\n", firstName, lastName)
   
 	fmt.Sscanf(input, format, &f, &i, &s)
 	fmt.Println("From the string we read: ", f, i, s)
 }
 ```
 
-* 程序运行结果
-
-```shell
-Please enter your full name:
-ai haofeng
-Hi ai haofeng!
-From the string we read:  56.12 5212 Go
-```
-
 * 程序说明
 
-(1) Scanln()函数扫描来自标准输入的文本，将空格分隔的输入值依次存放到后续的参数内，直到碰到换行。Scanf()函数与其类似，理解为格式化输入，它的第一个参数用作格式字符串，用来决定如何读取。
+(1) Scanln()函数扫描来自标准输入的文本，将空格分隔的输入值依次存放到对应的参数里面，直到碰到换行。Scanf()函数与其类似，理解为格式化的输入，它的第一个参数是格式字符串，用来决定如何读取数据进行格式化操作，后面的参数是对应的被格式化的值。
 
-(2) Sscan()和以Sscan开头的函数则是从字符串读取，除此之外，与Scanf()相同。
+(2) Sscan()和以Sscan开头的函数则是从字符串读取数据来输入。除此之外，与Scanf()相同。
 
-(3) 也可以使用bufio包提供的缓冲读取（buffered reader）来读取数据。
+(3) 可以使用bufio包提供的缓冲读取（buffered reader）来读取数据。
 
 
 
@@ -65,7 +56,7 @@ From the string we read:  56.12 5212 Go
 ```go
 // @file:        read_input_2.go
 // @version:     1.0
-// @author:      aihaofeng
+// @author:      haulf
 // @date:        2017.12.11
 // @go version:  1.9
 // @brief:       Read test.
@@ -92,27 +83,18 @@ func main() {
 }
 ```
 
-* 程序运行结果
-
-```shell
-Please enter some input:
-I am aihaofeng. Thank you very much.
-The input was: I am aihaofeng. Thank you very much.
-```
-
 * 程序说明
 
-(1) inputReader是一个指向bufio.Reader的指针。`inputReader = bufio.NewReader(os.Stdin)`这行代码，将会创建一个读取器，并将其与标准输入绑定。
+(1) inputReader是一个指向bufio.Reader的指针变量。`inputReader = bufio.NewReader(os.Stdin)`这行代码，将会创建一个读取器，并将其与标准输入进行绑定。
 
-(2) bufio.NewReader()构造函数的签名为：`func NewReader(rd io.Reader) *Reader`。该函数的实参可以是满足io.Reader接口的任意对象，函数返回一个新的带缓冲的io.Reader对象，它将从指定读取器（例如标准输入os.Stdin）读取内容。返回的读取器对象提供一个方法ReadString(delim byte)，该方法从输入中读取内容，直到碰到delim指定的字符，然后将读取到的内容连同delim字符一起放到缓冲区。ReadString返回读取到的字符串，如果碰到错误则返回nil。如果它一直读到文件结束，则返回读取到的字符串和io.EOF。如果读取过程中没有碰到delim字符，将返回错误err != nil。
+(2) bufio.NewReader()构造函数的签名为：`func NewReader(rd io.Reader) *Reader`。该函数的实参可以是满足io.Reader接口的任意对象，函数返回一个新的带缓冲的io.Reader对象，它将从指定读取器（例如标准输入os.Stdin）中读取内容。返回的读取器对象提供一个方法ReadString(delim byte)，该方法从输入中读取内容，直到碰到delim指定的字符，然后将读取到的内容连同delim字符一起放到缓冲区。ReadString返回读取到的字符串，如果碰到错误则返回nil。如果它一直读到文件结束，则返回读取到的字符串和io.EOF。如果读取过程中没有碰到delim字符，将返回错误err != nil。
 
-(3) 在上面的例子中，会读取键盘输入，直到回车键（\n）被按下。屏幕是标准输出os.Stdout；os.Stderr用于显示错误信息，大多数情况下等同于os.Stdout。一般情况下，会省略变量声明，而使用 :=，例如：
+(3) 在上面的例子中，程序会读取键盘输入，直到回车键（\n）被按下。屏幕是标准输出os.Stdout；os.Stderr用于显示错误信息，大多数情况下等同于os.Stdout。一般情况下，会省略变量声明，而使用 :=，例如：
 
 ```go
    inputReader := bufio.NewReader(os.Stdin)
    input, err := inputReader.ReadString('\n')
 ```
-
 
 
 第二个例子从键盘读取输入，使用了switch语句：
@@ -122,7 +104,7 @@ The input was: I am aihaofeng. Thank you very much.
 ```go
 // @file:        switch_input.go
 // @version:     1.0
-// @author:      aihaofeng
+// @author:      haulf
 // @date:        2017.12.11
 // @go version:  1.9
 // @brief:       Input test.
