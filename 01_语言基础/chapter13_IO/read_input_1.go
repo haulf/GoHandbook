@@ -1,6 +1,5 @@
 // @file:        read_input_1.go
 // @version:     1.0
-// @author:      aihaofeng
 // @date:        2017.12.11
 // @go version:  1.9
 // @brief:       Read test.
