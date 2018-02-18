@@ -4,16 +4,18 @@
 
 ### 13.1 读取用户的输入
 
-如何读取用户的键盘（控制台）输入呢？从键盘和标准输入os.Stdin读取输入，最简单的办法是使用fmt包提供的Scan()和Sscan()开头的函数。请看以下程序：
+这里读取用户的输入，是指从键盘和标准输入os.Stdin读取输入。
 
-* 程序示例【read_input_1.go】
+#### 13.1.1 使用fmt包提供的Scan()和Sscan()开头函数
+
+* 程序示例
 
 ```go
 // @file:        read_input_1.go
-// @author:      haulf
+// @version:     1.0
 // @date:        2017.12.11
 // @go version:  1.9
-// @brief:       Read test.
+// @brief:       Standard input and output test.
 
 package main
 
@@ -25,7 +27,7 @@ var (
 	firstName, lastName, s string
 	i                      int
 	f                      float32
-	input                  = "56.12 / 5212 / Go"
+	inputString            = "56.12 / 5212 / Go"
 	format                 = "%f / %d / %s"
 )
 
@@ -33,32 +35,29 @@ func main() {
 	fmt.Println("Please enter your full name: ")
 	fmt.Scanln(&firstName, &lastName)
 	// fmt.Scanf("%s %s", &firstName, &lastName)
-	fmt.Printf("Hi %s %s!\n", firstName, lastName)
-  
-	fmt.Sscanf(input, format, &f, &i, &s)
-	fmt.Println("From the string we read: ", f, i, s)
+	fmt.Printf("Your name is: %s %s!\n", firstName, lastName)
+
+	fmt.Sscanf(inputString, format, &f, &i, &s)
+	fmt.Println("From the inputString, we read: ", f, i, s)
 }
 ```
 
 * 程序说明
 
-(1) Scanln()函数扫描来自标准输入的文本，将空格分隔的输入值依次存放到对应的参数里面，直到碰到换行。Scanf()函数与其类似，理解为格式化的输入，它的第一个参数是格式字符串，用来决定如何读取数据进行格式化操作，后面的参数是对应的被格式化的值。
+(1) Scanln()函数扫描来自标准输入的文本，将空格分隔的输入值依次存放到对应的参数里面，直到碰到换行为止(函数名称以ln结尾)。Scanf()函数与其类似，理解为格式化的输入(函数最后一个字符为f，即format，格式化)，它的第一个参数是格式字符串，用来决定如何读取数据进行格式化操作，后面的参数是对应的被格式化的值。
 
-(2) Sscan()和以Sscan开头的函数则是从字符串读取数据来输入。除此之外，与Scanf()相同。
+(2) Sscan()和以Sscan开头的函数则是从字符串读取数据来输入(函数以大写的字符S开头)。除此之外，与Scanf()相同。
 
-(3) 可以使用bufio包提供的缓冲读取（buffered reader）来读取数据。
-
-
+#### 13.1.2 使用bufio包提供的缓冲读取（buffered reader）来读取数据
 
 * 程序示例【read_input_2.go】
 
 ```go
 // @file:        read_input_2.go
 // @version:     1.0
-// @author:      haulf
 // @date:        2017.12.11
 // @go version:  1.9
-// @brief:       Read test.
+// @brief:       Buffered read test.
 
 package main
 
@@ -74,10 +73,10 @@ var err error
 
 func main() {
 	inputReader = bufio.NewReader(os.Stdin)
-	fmt.Println("Please enter some input: ")
+	fmt.Println("Please enter: ")
 	input, err = inputReader.ReadString('\n')
 	if err == nil {
-		fmt.Printf("The input was: %s\n", input)
+		fmt.Printf("The input is: %s\n", input)
 	}
 }
 ```
@@ -93,106 +92,6 @@ func main() {
 ```go
    inputReader := bufio.NewReader(os.Stdin)
    input, err := inputReader.ReadString('\n')
-```
-
-
-第二个例子从键盘读取输入，使用了switch语句：
-
-* 程序示例【switch_input.go】
-
-```go
-// @file:        switch_input.go
-// @version:     1.0
-// @author:      haulf
-// @date:        2017.12.11
-// @go version:  1.9
-// @brief:       Input test.
-
-package main
-
-import (
-	"bufio"
-	"fmt"
-	"os"
-)
-
-func main() {
-	inputReader := bufio.NewReader(os.Stdin)
-	fmt.Println("Please enter your name:")
-	input, err := inputReader.ReadString('\n')
-	if err != nil {
-		fmt.Println("There were errors reading, exiting program.")
-		return
-	}
-
-	fmt.Printf("Your name is %s \n", input)
-
-	// For Unix: test with delimiter "\n", for Windows: test with"\r\n"
-	switch input {
-	case "Philip\n":
-		fmt.Println("Welcome Philip!")
-	case "Chris\n":
-		fmt.Println("Welcome Chris!")
-	case "Ivo\n":
-		fmt.Println("Welcome Ivo!")
-	default:
-		fmt.Printf("You are not welcome here! Goodbye!")
-	}
-
-	// version 2:
-	switch input {
-	case "Philip\n":
-		fallthrough
-	case "Ivo\n":
-		fallthrough
-	case "Chris\n":
-		fmt.Printf("Welcome %s\n", input)
-	default:
-		fmt.Printf("You are not welcome here! Goodbye!\n")
-	}
-
-	// version 3:
-	switch input {
-	case "Philip\n", "Ivo\n":
-		fmt.Printf("Welcome %s\n", input)
-	default:
-		fmt.Printf("You are not welcome here! Goodbye!\n")
-	}
-}
-```
-
-* 程序运行结果
-
-```shell
-➜  /Users/aihaofeng/Documents/workspace/aiGo_171210/GoHandbook/chapter13_读写数据 go run switch_input.go
-Please enter your name:
-Ivo
-Your name is Ivo
-
-Welcome Ivo!
-Welcome Ivo
-
-Welcome Ivo
-
-➜  /Users/aihaofeng/Documents/workspace/aiGo_171210/GoHandbook/chapter13_读写数据 go run switch_input.go
-Please enter your name:
-Philip
-Your name is Philip
-
-Welcome Philip!
-Welcome Philip
-
-Welcome Philip
-
-➜  /Users/aihaofeng/Documents/workspace/aiGo_171210/GoHandbook/chapter13_读写数据 go run switch_input.go
-Please enter your name:
-Chris
-Your name is Chris
-
-Welcome Chris!
-Welcome Chris
-
-You are not welcome here! Goodbye!
 ```
 
 ### 13.2 文件读写
