@@ -69,7 +69,7 @@
 /*
 @file:    multiple_return.go
 @version: v1.0
-@author:  aihaofeng
+@author:  haulf
 @date:    2017.11.12
 @brief:   Function test program.
 */
@@ -130,7 +130,7 @@ func getX2AndX3New(input int) (x2 int, x3 int) {
 /*
 @file:    blank_identifier.go
 @version: v1.0
-@author:  aihaofeng
+@author:  haulf
 @date:    2017.11.12
 @brief:   Function test program.
 */
@@ -171,7 +171,7 @@ The int: 5, the float: 7.500000
 /*
 @file:    side_effect.go
 @version: v1.0
-@author:  aihaofeng
+@author:  haulf
 @date:    2017.11.12
 @brief:   Function test program.
 */
@@ -225,7 +225,7 @@ Multiply: 50
 /*
 @file:    var_num_params.go
 @version: v1.0
-@author:  aihaofeng
+@author:  haulf
 @date:    2017.11.12
 @brief:   Function test program.
 */
@@ -330,7 +330,7 @@ func typecheck(..,..,values ...interface{}) {
 /*
 @file:    defer.go
 @version: v1.0
-@author:  aihaofeng
+@author:  haulf
 @date:    2017.11.12
 @brief:   Function test program.
 */
@@ -374,7 +374,7 @@ function2: Deferred until the end of the calling function!
 /*
 @file:    defer_param.go
 @version: v1.0
-@author:  aihaofeng
+@author:  haulf
 @date:    2017.11.12
 @brief:   Function test program.
 */
@@ -450,7 +450,7 @@ i=4 i=3 i=2 i=1 i=0
 /*
 @file:    defer_tracing.go
 @version: v1.0
-@author:  aihaofeng
+@author:  haulf
 @date:    2017.11.12
 @brief:   Function test program.
 */
@@ -502,7 +502,7 @@ leaving: b
 /*
 @file:    defer_tracingL_new.go
 @version: v1.0
-@author:  aihaofeng
+@author:  haulf
 @date:    2017.11.12
 @brief:   Function test program.
 */
@@ -546,7 +546,7 @@ func main() {
 /*
 @file:    defer_log_value.go
 @version: v1.0
-@author:  aihaofeng
+@author:  haulf
 @date:    2017.11.12
 @brief:   Function test program.
 */
@@ -604,7 +604,7 @@ func main() {
 /*
 @file:    fibonacci.go
 @version: v1.0
-@author:  aihaofeng
+@author:  haulf
 @date:    2017.11.12
 @brief:   Function test program.
 */
@@ -763,7 +763,7 @@ func(x,y int) int {
 ```go
 // @file:        return_defer.go
 // @version:     1.0
-// @author:      aihaofeng
+// @author:      haulf
 // @date:        2017.11.05
 // @go version:  1.9
 // @brief:       Return defer test.
@@ -827,7 +827,7 @@ func main() {
 ```go
 // @file:        function_return.go
 // @version:     1.0
-// @author:      aihaofeng
+// @author:      haulf
 // @date:        2017.11.05
 // @go version:  1.9
 // @brief:       Function return test.
@@ -885,7 +885,7 @@ func Adder(a int) func(b int) int {
 ```go
 // @file:        function_closure.go
 // @version:     1.0
-// @author:      aihaofeng
+// @author:      haulf
 // @date:        2017.11.05
 // @go version:  1.9
 // @brief:       Function return test.
@@ -1002,7 +1002,7 @@ func Adder() func(int) int {
 ```go
 // @file:        fibonacci_memory_optimization.go
 // @version:     1.0
-// @author:      aihaofeng
+// @author:      haulf
 // @date:        2017.11.05
 // @go version:  1.9
 // @brief:       Memory optimization test.

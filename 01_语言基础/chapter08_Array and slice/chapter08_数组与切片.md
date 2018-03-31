@@ -33,11 +33,10 @@
 * 程序示例
 
 ```go
-
 /*
 @file:    for_arrays.go
 @version: v1.0
-@author:  aihaofeng
+@author:  haulf
 @date:    2017.11.12
 @brief:   Array test program.
 */
