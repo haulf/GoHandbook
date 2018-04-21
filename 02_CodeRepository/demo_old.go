@@ -1,6 +1,5 @@
 // @file:        Demo.go
-// @version:     1.0
-// @author:      aihaofeng
+// @author:      haulf 
 // @date:        2017.09.08
 // @go version:  1.9
 // @brief:       Demo test.

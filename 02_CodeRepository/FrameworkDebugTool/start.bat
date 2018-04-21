@@ -18,7 +18,7 @@ echo delete temp file, end...
 
 @echo on
 
-%TOOL_PATH%\update_jar_and_dex.exe -r %CLASS_ROOT_PATH% -c %CLASS_PATH% -j %TOOL_PATH%\debug_jar\%TAREGET_JAR% -o %TAREGET_JAR%
+%TOOL_PATH%\UpdateJarAndDex.exe -r %CLASS_ROOT_PATH% -c %CLASS_PATH% -j %TOOL_PATH%\debug_jar\%TAREGET_JAR% -o %TAREGET_JAR%
 pause
 
 rem echo.
