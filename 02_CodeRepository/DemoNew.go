@@ -1,7 +1,6 @@
-// @file:        Demo.go
+// @file:        DemoNew.go
 // @author:      haulf
 // @date:        2017.09.08
-// @go version:  1.9
 // @brief:       Demo test.
 
 package main
