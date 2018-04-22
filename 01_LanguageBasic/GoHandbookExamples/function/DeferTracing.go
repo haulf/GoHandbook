@@ -1,10 +1,7 @@
-/*
-@file:    defer_tracing.go
-@version: v1.0
-@author:  aihaofeng
-@date:    2017.11.12
-@brief:   Function test program.
-*/
+// file:    DeferTracing.go
+// author:  haulf
+// date:    2017.11.12
+// brief:   Tracing function with defer.
 
 package main
 

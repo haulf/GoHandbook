@@ -1,10 +1,7 @@
-/*
-@file:    defer_param.go
-@version: v1.0
-@author:  aihaofeng
-@date:    2017.11.12
-@brief:   Function test program.
-*/
+// file:    DeferParamSequence.go
+// author:  haulf
+// date:    2017.11.12
+// brief:   Test the sequence of multi defer params.
 
 package main
 

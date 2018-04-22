@@ -1,10 +1,7 @@
-/*
-@file:    function_params.go
-@version: v1.0
-@author:  aihaofeng
-@date:    2017.11.12
-@brief:   Function test program.
-*/
+// file:    function_params.go
+// author:  aihaofeng
+// date:    2017.11.12
+// brief:   Function test program.
 
 package main
 
