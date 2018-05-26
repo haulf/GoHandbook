@@ -1,8 +1,6 @@
-// @file:        read_write_file_1.go
-// @version:     1.0
+// @file:        ReadWriteFile1.go
 // @author:      aihaofeng
 // @date:        2017.12.25
-// @go version:  1.9
 // @brief:       Read and write test.
 
 package main

@@ -1,7 +1,6 @@
-// @file:        read_input_2.go
+// @file:        ReadInput2.go
 // @version:     1.0
 // @date:        2017.12.11
-// @go version:  1.9
 // @brief:       Buffered read test.
 
 package main
