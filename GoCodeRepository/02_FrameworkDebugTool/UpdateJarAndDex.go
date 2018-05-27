@@ -1,7 +1,6 @@
+// file:       UpdateJarAndDex
 // author:     haulf
 // date:       2017.09.18
-// version:    1.0
-// go version: 1.9
 // brief:      Update jar and dex.
 
 package main
@@ -22,7 +21,7 @@ import (
 var debugLog *log.Logger
 
 func main() {
-	logFileName := "ahf_debug_log_file"
+	logFileName := "HaulfDebugLogFile"
 	logFile, err := os.Create(logFileName)
 	defer logFile.Close()
 	if err != nil {
@@ -61,9 +60,7 @@ func main() {
 
 	tempJarName := "temp.jar"
 	copyFile(currentPath+"\\tmp\\"+tempJarName, *debugJarPath)
-
 	packClassToJar(*classRootPath, *classPath, currentPath+"\\tmp\\"+tempJarName)
-
 	execDexOptimize(currentPath+"\\lib\\dx.jar", currentPath+"\\"+*outputTargetJar, currentPath+"\\tmp\\"+tempJarName)
 
 	debugLog.Println(">>>>>>>>>>end")
@@ -123,11 +120,13 @@ func copyFile(dstName, srcName string) (written int64, err error) {
 		return
 	}
 	defer src.Close()
+
 	dst, err := os.OpenFile(dstName, os.O_WRONLY|os.O_CREATE, 0644)
 	if err != nil {
 		return
 	}
 	defer dst.Close()
+
 	return io.Copy(dst, src)
 }
 

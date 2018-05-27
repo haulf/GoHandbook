@@ -1,8 +1,7 @@
-// @file:        gzipped.go
-// @author:      haulf
-// @date:        2018.02.20
-// @go version:  1.9
-// @brief:       Demo test.
+// file:        gzipped.go
+// author:      haulf
+// date:        2018.02.20
+// brief:       Demo test.
 
 package main
 

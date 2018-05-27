@@ -1,5 +1,5 @@
 // @file:        ReadWriteFile1.go
-// @author:      aihaofeng
+// @author:      haulf
 // @date:        2017.12.25
 // @brief:       Read and write test.
 

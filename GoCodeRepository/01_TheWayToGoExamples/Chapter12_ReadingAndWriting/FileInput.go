@@ -28,6 +28,6 @@ func main() {
 		if readerError == io.EOF {
 			return
 		}
-		fmt.Printf("The input was: %s", inputString)
+		fmt.Printf("%s", inputString)
 	}
 }

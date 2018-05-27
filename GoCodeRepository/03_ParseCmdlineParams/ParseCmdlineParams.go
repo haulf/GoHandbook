@@ -1,7 +1,6 @@
 // file:        ParseCmdlineParameters.go
 // author:      haulf
 // date:        2018.02.20
-// go version:  1.9
 // brief:       Parse cmdline from kernel.
 
 package main
@@ -15,10 +14,6 @@ import (
 )
 
 func main() {
-    parseCmdlineParameters()
-}
-
-func parseCmdlineParameters()  {
     cmdlineFile, inputError := os.Open("cmdline")
     if inputError != nil {
         return

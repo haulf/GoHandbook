@@ -1,9 +1,7 @@
-// @file:        switch_input.go
-// @version:     1.0
-// @author:      aihaofeng
-// @date:        2017.12.11
-// @go version:  1.9
-// @brief:       Input test.
+// file:        SwitchInput.go
+// author:      haulf
+// date:        2017.12.11
+// brief:       Input test.
 
 package main
 

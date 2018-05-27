@@ -1,7 +1,10 @@
-// @file:        ReadWriteFile2.go
-// @author:      haulf
-// @date:        2018.02.20
-// @brief:       Demo test.
+// file:        ReadWriteFile2.go
+// author:      haulf
+// date:        2018.02.20
+// brief:       If the data columns are separated by a space, you can use the FScan-function
+//              series from the "fmt" package. This is applied in  the following program,
+//              which reads in data form 3 columns into the variables v1, v2 and v3; they are
+//              then appended to column slices.
 
 package main
 
@@ -15,7 +18,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
 	defer file.Close()
 
 	var col1, col2, col3 []string

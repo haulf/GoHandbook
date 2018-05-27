@@ -1,16 +1,13 @@
-// @file:        file_copy.go
-// @author:      haulf
-// @date:        2018.02.20
-// @go version:  1.9
-// @brief:       File copy test.
+// file:        FileCopy.go
+// author:      haulf
+// date:        2018.02.20
+// brief:       Using Copy from the package io to copy a file to another file.
 
 package main
 
 import (
 	"fmt"
-
 	"io"
-
 	"os"
 )
 

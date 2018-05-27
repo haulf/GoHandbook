@@ -1,8 +1,7 @@
-// @file:        os_args.go
-// @author:      haulf
-// @date:        2018.02.20
-// @go version:  1.9
-// @brief:       Os args test.
+// file:        OsArgs.go
+// author:      haulf
+// date:        2018.02.20
+// brief:       Os args test.
 
 package main
 
