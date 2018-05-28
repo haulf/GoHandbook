@@ -23,18 +23,22 @@ func main() {
 
 	flag.Parse() // Scan the argument list(or list of constants) and sets up flags.
 
-	var s string = ""
+	var s string = " "
 	fmt.Println("The number of arguments is:", flag.NArg())
 	for i := 0; i < flag.NArg(); i++ { // flag.NArg() is the number of arguments.
 		if i > 0 {
 			s += Space
 		}
 		s += flag.Arg(i)
+
+		if *NewLine {
+			s += Newline
+		}
 	}
 
-	if *NewLine { // -n is parsed, flag becomes true
-		s += Newline
-	}
+	// if *NewLine { // -n is parsed, flag becomes true
+	// s += Newline
+	// }
 
 	os.Stdout.WriteString(s)
 }
