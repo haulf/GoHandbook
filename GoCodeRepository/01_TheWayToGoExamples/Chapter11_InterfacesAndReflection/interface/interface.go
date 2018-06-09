@@ -1,10 +1,7 @@
-/*
-@file:    interface_demo.go
-@version: v1.0
-@author:  aihaofeng
-@date:    2017.09.28
-@brief:   Demo test program.
-*/
+// file:    interface.go
+// author:  haulf
+// date:    2017.09.28
+// brief:   Demo test program.
 
 package main
 
@@ -24,21 +21,21 @@ func (sq *Square) Area() float32 {
 
 func main() {
 	// case one
-	// sq1 := new(Square)
-	// sq1.side = 5
-	// areaIntf := sq1
-	// fmt.Printf("The square has area: %f\n", areaIntf.Area())
+	// square := new(Square)
+	// square.side = 5
+	// areaInterface := square
+	// fmt.Printf("The square has area: %f\n", areaInterface.Area())
 
 	// case two
-	sq1 := new(Square)
-	sq1.side = 5
-	var areaIntf Shaper
-	areaIntf = sq1
-	fmt.Printf("The square has area: %f\n", areaIntf.Area())
+	// square := new(Square)
+	// square.side = 5
+	// var areaInterface Shaper
+	// areaInterface = square
+	// fmt.Printf("The square has area: %f\n", areaInterface.Area())
 
 	// case three
-	// sq1 := new(Square)
-	// sq1.side = 5
-	// areaIntf := Shaper(sq1)
-	// fmt.Printf("The square has area: %f\n", areaIntf.Area())
+	square := new(Square)
+	square.side = 5
+	areaInterface := Shaper(square)
+	fmt.Printf("The square has area: %f\n", areaInterface.Area())
 }

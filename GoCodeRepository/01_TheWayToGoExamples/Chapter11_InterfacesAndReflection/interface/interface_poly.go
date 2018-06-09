@@ -1,10 +1,7 @@
-/*
-@file:    interface_poly.go
-@version: v1.0
-@author:  aihaofeng
-@date:    2017.10.17
-@brief:   Interface test program.
-*/
+// file:    interface_poly.go
+// author:  haulf
+// date:    2017.10.17
+// brief:   Interface test program.
 
 package main
 
@@ -31,10 +28,14 @@ func (r Rectangle) Area() float32 {
 }
 
 func main() {
-	r := Rectangle{5, 3}
-	q := &Square{5}
-	shapers := []Shaper{Shaper(r), Shaper(q)}
-	// shapers := []Shaper{r, q}
+	rectangle := Rectangle{5, 3}
+	square := &Square{5}
+
+	// case one
+	shapers := []Shaper{Shaper(rectangle), Shaper(square)}
+
+	// case two
+	// shapers := []Shaper{rectangle, square}
 
 	fmt.Println("Looping through shapes for area ...")
 

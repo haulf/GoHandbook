@@ -1,13 +1,13 @@
-// @file:        empty_interface_switch.go
-// @version:     1.0
-// @author:      aihaofeng
-// @date:        2017.10.17
-// @go version:  1.9
-// @brief:       Empty interface switch test.
+// file:        empty_interface_switch.go
+// author:      haulf
+// date:        2017.10.17
+// brief:       Empty interface switch test.
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type specialString string
 

@@ -1,13 +1,13 @@
-// @file:        empty_interface.go
-// @version:     1.0
-// @author:      aihaofeng
-// @date:        2017.09.08
-// @go version:  1.9
-// @brief:       Empty interface test.
+// file:        empty_interface.go
+// author:      aihaofeng
+// date:        2017.09.08
+// brief:       Empty interface test.
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 var i = 5
 var str = "ABC"

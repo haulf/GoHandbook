@@ -1,4 +1,4 @@
-// file:        DemoNew.go
+// file:        demo_new.go
 // author:      haulf
 // date:        2017.09.08
 // brief:       Demo test.

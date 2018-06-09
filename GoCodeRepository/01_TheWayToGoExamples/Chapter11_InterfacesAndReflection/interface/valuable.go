@@ -1,9 +1,7 @@
-// @file:        valuable.go
-// @version:     1.0
-// @author:      aihaofeng
-// @date:        2017.09.08
-// @go version:  1.9
-// @brief:       Interface test program.
+// file:        valuable.go
+// author:      haulf
+// date:        2017.09.08
+// brief:       Interface test program.
 
 package main
 

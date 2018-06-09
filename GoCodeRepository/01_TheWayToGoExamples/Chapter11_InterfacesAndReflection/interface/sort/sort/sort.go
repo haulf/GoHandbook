@@ -1,7 +1,7 @@
 // file:    sort.go
-// author:  haulf      
-// @date:   2017.10.17
-// @brief:  Sort test.
+// author:  haulf
+// date:    2017.10.17
+// brief:   Sort test.
 
 package sort
 
