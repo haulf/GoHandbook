@@ -1,24 +1,24 @@
 @echo off
 
-@rem Copyright (c) 2017 AiHaofeng
+:: Copyright (C) 2017~2018 haulf
 
 :: modify begin
 set TAREGET_JAR=services.jar
-set CLASS_ROOT_PATH=D:\Android_Studio_Debug_Space\workspace\FrameworkDebug\fwkdbg711\build\classes\main
+set CLASS_ROOT_PATH=D:\Android_Studio_Debug_Space\workspace\FrameworkDebug\FrameworkDebug81\build\classes\java\main
 :: modify end
 
-set TOOL_PATH=D:\DebugSpace\framework_debug_tool
+set TOOL_PATH=D:\DebugSpace\FrameworkDebugTools
 set CLASS_PATH=%TOOL_PATH%\class_path.txt
 
 echo delete temp file, begin...
 del %TOOL_PATH%\*.jar
 del %TOOL_PATH%\tmp\*.jar
-del %TOOL_PATH%\*.log_file
+del %TOOL_PATH%\log
 echo delete temp file, end...
 
 @echo on
 
-%TOOL_PATH%\UpdateJarAndDex.exe -r %CLASS_ROOT_PATH% -c %CLASS_PATH% -j %TOOL_PATH%\debug_jar\%TAREGET_JAR% -o %TAREGET_JAR%
+go run %TOOL_PATH%\UpdateJarAndDex.go -r %CLASS_ROOT_PATH% -c %CLASS_PATH% -j %TOOL_PATH%\debug_jar\%TAREGET_JAR% -o %TAREGET_JAR%
 pause
 
 rem echo.

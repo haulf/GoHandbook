@@ -1,6 +1,6 @@
-// file:       UpdateJarAndDex
+// file:       UpdateJarAndDex.go
 // author:     haulf
-// date:       2017.09.18
+// date:       20180712
 // brief:      Update jar and dex.
 
 package main
@@ -11,27 +11,15 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"log"
 	"os"
 	"os/exec"
 	"regexp"
 	"strings"
+	// "time"
 )
 
-var debugLog *log.Logger
-
 func main() {
-	logFileName := "HaulfDebugLogFile"
-	logFile, err := os.Create(logFileName)
-	defer logFile.Close()
-	if err != nil {
-		log.Fatalln("Open file error !")
-	}
-
-	debugLog = log.New(logFile, "[ahf]", log.Flags()|log.Ldate|log.Lmicroseconds|log.Lshortfile)
-	debugLog.Println(">>>>>>>>>>begin\n")
-
-	fmt.Println("\n\nCopyright (C) aihaofeng 2017\n\n")
+	fmt.Println("\n\nCopyright (C) aihaofeng 2017 2018\n\n")
 
 	if len(os.Args) > 1 && os.Args[1] == "--help" {
 		printUsage(os.Stdout)
@@ -47,23 +35,15 @@ func main() {
 
 	flag.Parse()
 
-	debugLog.Println("classRootPath is:", *classRootPath)
-	debugLog.Println("classPath is:", *classPath)
-	debugLog.Println("debugJarPath is:", *debugJarPath)
-	debugLog.Println("outputTargetJar is:", *outputTargetJar)
-	debugLog.Println("")
-
 	currentPath, err := os.Getwd()
 	if err != nil {
-		debugLog.Println("Get current work directory error.")
+		fmt.Println("Get current work directory error.")
 	}
 
 	tempJarName := "temp.jar"
 	copyFile(currentPath+"\\tmp\\"+tempJarName, *debugJarPath)
 	packClassToJar(*classRootPath, *classPath, currentPath+"\\tmp\\"+tempJarName)
-	execDexOptimize(currentPath+"\\lib\\dx.jar", currentPath+"\\"+*outputTargetJar, currentPath+"\\tmp\\"+tempJarName)
-
-	debugLog.Println(">>>>>>>>>>end")
+	execDexOptimize(currentPath+"\\lib\\d8.jar", currentPath+"\\"+*outputTargetJar, currentPath+"\\tmp\\"+tempJarName)
 }
 
 func printUsage(w *os.File) {
@@ -77,30 +57,36 @@ func usage() {
 
 func packClassToJar(classRootPath, classPath, tempJar string) {
 	debugClassTotalNames := getDebugClassName(classPath)
-	fmt.Println("更新开始\n")
+
+	fmt.Println("更新开始，请稍侯...\n")
+
 	var debugClasses []string
 	for _, debugClassTotalName := range debugClassTotalNames {
-		debugLog.Println("#packClassToJar#DebugClassTotalName:", debugClassTotalName)
 		singlePathValues := strings.Split(debugClassTotalName, ".")
 		relativeClassPath := strings.Join(singlePathValues[:len(singlePathValues)-1], "\\")
 		basicClassName := singlePathValues[len(singlePathValues)-1]
 
 		debugClasses = listClassFiles(classRootPath, relativeClassPath, basicClassName)
+		// fmt.Println(time.Now().Format("2006-01-02 15:04:05.0000000"))
+
+		classArgs := []string{"uf", tempJar}
+
 		for _, debugClass := range debugClasses {
-			debugLog.Println(">>> #packClassToJar#debugClass is:", debugClass)
-			execUpdateCommand(classRootPath, debugClass, tempJar)
+			fmt.Println(">> 更新  " + debugClass)
+			classArgs = append(classArgs, "-C")
+			classArgs = append(classArgs, classRootPath)
+			classArgs = append(classArgs, debugClass)
 		}
+
+		execUpdateCommand(tempJar, classArgs)
+		// fmt.Println(time.Now().Format("2006-01-02 15:04:05.0000000"))
 	}
 	fmt.Println("\n更新结束\n")
 }
 
 func listClassFiles(classRootPath, sourcePath, baseName string) (classFiles []string) {
-	debugLog.Println("#listClassFiles#classRootPath is:", classRootPath)
-	debugLog.Println("#listClassFiles#sourcePath is:", sourcePath)
-
 	files, _ := ioutil.ReadDir(classRootPath + "\\" + sourcePath)
 	for _, file := range files {
-		debugLog.Println("#listClassFiles#class file is:", file.Name())
 		if file.IsDir() {
 			listClassFiles(classRootPath, sourcePath+"\\"+file.Name(), baseName)
 		} else {
@@ -120,20 +106,18 @@ func copyFile(dstName, srcName string) (written int64, err error) {
 		return
 	}
 	defer src.Close()
-
 	dst, err := os.OpenFile(dstName, os.O_WRONLY|os.O_CREATE, 0644)
 	if err != nil {
 		return
 	}
 	defer dst.Close()
-
 	return io.Copy(dst, src)
 }
 
 func getDebugClassName(fileName string) (debugClassNames []string) {
 	f, err := os.Open(fileName)
 	if err != nil {
-		debugLog.Println("getDebugClassName#open file failure.")
+		fmt.Println("Open class file failure.")
 	}
 	buf := bufio.NewReader(f)
 	for {
@@ -144,32 +128,26 @@ func getDebugClassName(fileName string) (debugClassNames []string) {
 			if err == io.EOF {
 				return
 			}
-			debugLog.Println("getDebugClassName#read string err", err)
+			fmt.Println("Get debug class name error.")
 		}
 	}
 	return
 }
 
-func execUpdateCommand(classRootPath, classFile, tempJar string) {
-	debugLog.Println("#execUpdateCommand#classRootPath is:", classRootPath)
-	debugLog.Println("#execUpdateCommand#classFile is:", classFile)
-	debugLog.Println("#execUpdateCommand#tempJar is:", tempJar)
-	fmt.Println(">> 更新 ", classFile)
-	cmd := exec.Command("CMD", "/K", "jar -uvf", tempJar, "-C", classRootPath, classFile)
-
-	debugLog.Println(">>>>>", cmd.Args)
+func execUpdateCommand(tempJar string, classArgs []string) {
+	cmd := exec.Command("jar", classArgs...)
 	err := cmd.Run()
 	if err != nil {
 		fmt.Println("\n更新class文件过程中出现了错误，请仔细检查!\n")
-		debugLog.Println("更新class文件过程中出现了错误，err信息为：", err)
 	}
 }
 
 func execDexOptimize(dexJarPath, outputTargetJar, tempJar string) {
-	cmd := exec.Command("CMD", "/C", "java -Xmx2048M -jar ", dexJarPath, "--dex", "--multi-dex", "--output="+outputTargetJar, tempJar)
-	debugLog.Println("Dex优化命令：", cmd.Args)
+	fmt.Println("优化开始，请稍侯...\n")
+	cmd := exec.Command("CMD", "/K", "java", "-jar", dexJarPath, "--release", "--min-api", "26", "--output", outputTargetJar, tempJar)
 	err := cmd.Run()
 	if err != nil {
-		debugLog.Println("Dex优化过程中出现了错误，err信息为：", err)
+		fmt.Println("Dex优化过程中出现错误。\n")
 	}
+	fmt.Println("优化结束\n")
 }
