@@ -1,8 +1,7 @@
-// author:     haulf
-// date:       2017.09.18
-// version:    1.0
-// go version: 1.9
-// brief:      Install apks test.
+// file:        InstallApks.go
+// author:      Haulf
+// date:        2017.09.18
+// brief:       Install apks test.
 
 package main
 

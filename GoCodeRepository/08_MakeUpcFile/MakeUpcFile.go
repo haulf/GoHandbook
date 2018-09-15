@@ -1,5 +1,5 @@
-// file:        make_upc_file.go
-// author:      haulf
+// file:        MakeUpcFile.go
+// author:      Haulf
 // date:        2018.06.22
 // brief:       Make upc file.
 

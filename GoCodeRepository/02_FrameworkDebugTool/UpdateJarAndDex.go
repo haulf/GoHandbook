@@ -29,7 +29,7 @@ func main() {
 	flag.Usage = usage
 
 	classRootPath := flag.String("r", "D:\\Android_Studio_Debug_Space\\workspace\\FrameworkDebug\\fwkdbg711\\build\\classes\\main", "the root path of class file")
-	classPath := flag.String("c", "class_path.txt", "the path of class_path.txt")
+	classPath := flag.String("c", "ClassPath.txt", "the path of ClassPath.txt")
 	debugJarPath := flag.String("j", "debug_jar/service.jar", "the path of debug jar")
 	outputTargetJar := flag.String("o", "service.jar", "the name of out target jar")
 

@@ -1,10 +1,10 @@
 
-:: Copyright (C) haulf 2017
+:: Copyright (C) Haulf 2017
 
 @ECHO OFF
 
-go build install_apks.go
+go build InstallApks.go
 
-install_apks.exe
+InstallApks.exe
 
 PAUSE

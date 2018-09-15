@@ -8,7 +8,7 @@ set CLASS_ROOT_PATH=D:\Android_Studio_Debug_Space\workspace\FrameworkDebug\Frame
 :: modify end
 
 set TOOL_PATH=D:\DebugSpace\FrameworkDebugTools
-set CLASS_PATH=%TOOL_PATH%\class_path.txt
+set CLASS_PATH=%TOOL_PATH%\ClassPath.txt
 
 echo delete temp file, begin...
 del %TOOL_PATH%\*.jar

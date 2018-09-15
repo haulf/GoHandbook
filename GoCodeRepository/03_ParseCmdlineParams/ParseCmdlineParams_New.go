@@ -1,4 +1,4 @@
-// file:        ParseCmdlineParametersz_New.go
+// file:        ParseCmdlineParams_New.go
 // author:      haulf
 // date:        2018.05.27
 // brief:       Parse cmdline from kernel.

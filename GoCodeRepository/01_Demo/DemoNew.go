@@ -1,7 +1,7 @@
-// file:        demo_new.go
-// author:      haulf
-// date:        2017.09.08
-// brief:       Demo test.
+// file:     DemoNew.go
+// author:   Haulf
+// date:     2017.09.08
+// brief:    Demo test.
 
 package main
 
