@@ -76,7 +76,6 @@
 ```
 
 
-
 ### 1.7 GetFavouriteCarNumber
 
 ```shell
@@ -87,7 +86,6 @@
 ```
 
 
-
 ### 1.8 MakeUpcFile
 
 ```shell
@@ -96,10 +94,6 @@
 |____MakeUpcFile.go
 |____README.txt
 ```
-
-
-
-
 
 
 ## 2 Code commit
